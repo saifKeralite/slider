@@ -73,6 +73,11 @@ body{
 .h1, h1 {
     font-size: 4.9rem;
 }
+
+h1 span{
+    font-size:  1rem;
+    animation: easing 0.7s ease infinite;
+}
 /* *******************************  */
 
 
@@ -204,7 +209,6 @@ body.loaded .slider-wrapper{
     position: relative;
     width: auto;
     padding: 40px 40px 80px 40px;
-    overflow: hidden;
 }
 
 .slide-element-right-content{
@@ -221,13 +225,6 @@ body.loaded .slider-wrapper{
     padding-top: 190px;
 }
 
-.slide-element-slider-content h1{
-    color: #F8B508;
-}
-
-.slide-element-slider-content p {
-    color: #ffffff;
-}
 
 .slide-element-img-bg{
     position: relative;
@@ -250,7 +247,6 @@ body.loaded .slider-wrapper{
 .slide-element-img-highlight{
     width: 100%;
     height: 100%;
-    background: #E3A400;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -292,6 +288,10 @@ body.loaded .slider-wrapper{
     animation: showElement 0.2s ease-in 1s forwards;
 }
 
+.clicked .slide-img-info .text-block{
+    animation: showElement 0.2s ease-in 1s forwards;
+}
+
 .clicked{
     animation: clicked 0.2s ease-in forwards;
 }
@@ -314,10 +314,9 @@ body.loaded .slider-wrapper{
 .slider-shadow{
     width: 300px;
     height: 300px;
-    background: rgba(255,255,255,0.01);
     position: absolute;
     bottom: 100px;
-    right: -30px;
+    right: -10px;
 }
 
 /* Slider stick  */
@@ -351,13 +350,33 @@ body.loaded .slider-wrapper{
 }
 
 a{
-    color: #00ff08;
     font-weight: 500;
 }
 
 a:hover{
     color: #00ff08;
     font-weight: 500;
+}
+
+.text-block{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    opacity: 0;
+}
+
+.text-block span{
+    display: inline-block;
+    width: 100%;
+    height: 23px;
+    margin-bottom: 10px;
+    background: #dbdbdb;
+    border-radius: 10px;
+}
+
+.text-block span:last-of-type{
+    margin-bottom: 0;
 }
 /* Height breakpoints  */
 @media screen and (max-height: 1200px) {
@@ -375,6 +394,9 @@ a:hover{
 /* Width Breakpoints  */
 
 @media screen and (max-width: 1024px) {
+    .h1, h1 {
+        font-size: 3rem;
+    }
     .slider-wrapper,
     .slider-border,
     .slider-border .slide-element{
@@ -404,13 +426,58 @@ a:hover{
         align-items: center;
         justify-content: center;
         width: 100%;
+        padding-top: 0;
     }
     .slider-shadow,
     .slider-stick{
         display: none;
     }
+
+    .color-picker-wrapper .color-c{
+        width: 35px;
+        height: 100%;
+    }
+
+    .color-picker{
+        height: 30px;
+    }
+
+    .color-picker{
+        left: 80%;
+    }
+}
+.color-picker{
+    position: absolute;
+    top: 50px;
+    width: auto;
+    height: 60px;
+    background: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+    left: 50%;
+    padding: 0 33px;
+    transform: translateX(-50%);
 }
 
+.color-picker-wrapper{
+    width: 100%;
+    height: 100%;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.color-picker-wrapper .color-c{
+    width: 65px;
+    height: 100%;
+}
+
+.color-picker-wrapper .color-c:last-child{
+    margin-right: 0;
+}
 /* Animation keyframes  */
 @keyframes rot1 {
     50%{
@@ -424,6 +491,16 @@ a:hover{
 @keyframes lightson{
     100%{
         background: #07080F;
+    }
+}
+@keyframes lightsonblue{
+    100%{
+        background: #020514;
+    }
+}
+@keyframes lightsongreen{
+    100%{
+        background: #010e03;
     }
 }
 
@@ -508,4 +585,103 @@ a:hover{
         bottom: 0;
     }
 }
+
+@keyframes easing {
+    50%{
+        font-size: 1.7rem;
+    }
+    100%{
+        font-size: 1rem;
+    }
+    
+}
 /* End of Animation keyframes  */
+
+
+/* custom color change*/
+body.t-blue{
+    animation: lightsonblue 0.4s ease-in forwards;
+    transition: all 0.5s ease;
+}
+body.t-green{
+    animation: lightsongreen 0.4s ease-in forwards;
+    transition: all 0.5s ease;
+}
+.color-c{
+    display: inline-block;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.2s ease;
+}
+
+.color-c:hover{
+    transition: all 0.2s ease;
+    transform: scale(1.2);
+}
+.color-c.t-yellow  {
+    background: #E3A400;
+}
+.color-c.t-blue  {
+    background: #445fef;
+}
+.color-c.t-green  {
+    background: #22af3a;
+}
+.t-yellow .color-c.t-yellow  {
+    background: #E3A400;
+}
+.t-blue .color-c.t-blue  {
+    background: #445fef;
+}
+
+.t-yellow  .slide-element-img-highlight {
+    background: #E3A400;
+}
+.t-blue  .slide-element-img-highlight {
+    background: #445fef;
+}
+.t-green  .slide-element-img-highlight {
+    background: #22af3a;
+}
+
+
+.t-blue .slide-element-img-bg{
+    background: #000f2a;
+}
+.t-green .slide-element-img-bg{
+    background: #006611;
+}
+
+.color-picker{
+    background:rgba(255,255,255,0.08);
+}
+
+.t-yellow  .slide-element-slider-content h1{
+    color: #F8B508;
+}
+.t-blue  .slide-element-slider-content h1{
+    color: #ffffff;
+}
+
+.t-green  .slide-element-slider-content h1{
+    color: #ffffff;
+}
+
+
+
+.t-yellow  .slide-element-slider-content p{
+    color: #ffffff;
+}
+.t-blue  .slide-element-slider-content p{
+    color: #ffffff;
+}
+.t-green  .slide-element-slider-content p{
+    color: #ffffff;
+}
+
+.t-yellow  a{
+    color: #00ff08;
+}
+.t-yellow  .slider-shadow{
+    background: rgba(255,255,255,0.01);
+}

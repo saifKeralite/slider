@@ -37,7 +37,6 @@ setTimeout(()=> {
 
 
 function initScroll () {
-  
    // Sc (1) : Slick Slider init. 
    $('.slider-border').slick({
     slidesToShow: 1,
@@ -45,7 +44,8 @@ function initScroll () {
     autoplaySpeed: 2000,
     vertical: true,
     infinite: true,
-    arrows: false
+    arrows: false,
+    draggable: false
   });
 
   $('.slick-active').addClass('active-animated-slick')
@@ -64,6 +64,7 @@ function initScroll () {
 }
 
 $('.slider-border').on('beforeChange', (e)=> {
+  // Sc (3): Animation on each slide.
   let nextSlide = $(e.currentTarget).find('.slick-active').next();
   let prevSlide = $(e.currentTarget).find('.slick-active').prev();
   if(nextSlide.hasClass('slick-cloned')) console.log('it has slick cloned status')
@@ -85,11 +86,18 @@ $('.slider-border').on('beforeChange', (e)=> {
 
 function clickEvents () {
   $('.slide-element-img-highlight').click(e=> {
-    
     $(e.target).parent().addClass('clicked')
   })
 
   $('.slider-border').on('afterChange', (e)=> {
     $('.slide-element-img-bg').removeClass('clicked')
+  })
+
+  $('.color-c').click(e=> {
+    e.stopPropagation();
+    let currentBodyClass = $('body').attr('class').split(' ').filter(e=> e !== 'loaded')[0]
+    let getColorName = $(e.target).data('color-name')
+    $('body').removeClass(currentBodyClass)
+    $('body').addClass(getColorName)
   })
 }
